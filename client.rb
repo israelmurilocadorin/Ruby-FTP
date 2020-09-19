@@ -1,5 +1,9 @@
 require_relative 'connection.rb'
 
+def space(num)
+    
+end
+
 class Client
 
     @connection_ftp = nil
@@ -10,7 +14,11 @@ class Client
     end
 
     def create
-        puts 'create'
+        puts "Digite o nome do arquivo que deseja transferir: "
+        name = gets.chomp
+        @connection_ftp.put name, name
+        puts "Arquivo criado com sucesso"
+        #@connection_ftp.close
     end
 
     def remove
