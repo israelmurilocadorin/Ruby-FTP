@@ -1,63 +1,61 @@
+require_relative 'connection.rb'
+
 class Client
 
-    #lista = Array.new
-    @@lista = Array.new
-    @@pop = "pop"
-    
-    #constructor
-    def initialize(path)
-        @path = path
+    @connection_ftp = nil
+
+    def initialize(connection_ftp)
+        #connection_ftp.login
+        @connection_ftp = connection_ftp
     end
 
-    def create()
-        #out_file = File.new("osssssd.txt", "w")#Create text file (empty "w")
-        puts @path
-        puts @@pop
-        @@lista = 
-        
-        #@@lista.each do |items|
-        #    puts items
-        #end
-
+    def create
+        puts 'create'
     end
 
-    def self.list(diretorio)
-        filenames = Dir.entries(diretorio)
-        puts "> Lista de arquivos <"
-        puts filenames
-    end
-    
-    def self.update() 
-        nome_atual = ""
-        nome_novo = ""
-        
-        puts "Digite o nome atual do arquivo que deseja modificar: "
-        nome_atual = gets
-        #Needs to be done
-        #Search name in the array
-        puts "Digite o novo nome desejado: "
-        nome_novo = gets
-
-        File.rename("arc.txt", "arquivo.txt")
+    def remove
+        puts 'remove'
     end
 
-    def self.delete(diretorio)
-        
-        #if (File.Exists(fileName))  
-        #    File.Delete(fileName);    
-        #end
-
-        if(File.exist?(diretorio))
-            File.delete(diretorio)
-            puts "> Deletado com sucesso <"
-        else
-            puts "> Arquivo inexistente <"
-        end
+    def list
+        puts @connection_ftp.list('*') 
     end
-    
+
+    def download
+        puts 'download'
+    end
+
+    def close
+        @connection_ftp.close
+        puts 'Close connection'
+    end
+
 end
 
-#Client.create('C:\Users\israe\Desktop\FTP\arquivos')
+client = Client.new(Connection.new.connection)
+puts "Bem vindo!"
+puts "Para sair aperte crtl+c [*]"
+puts "\n\n\n"
 
-novaClass = Client.new('C:\Users\israe\Desktop\FTP\arquivos')
-novaClass.create()
+while true do
+    puts "Digite a opção desejada: "
+    puts "[1]Criar" 
+    puts "[2]??"
+    puts "[3]??"
+    puts "[4]Deletar"
+    opcao = gets.chomp
+    
+    case opcao
+        when '1'
+            client.create
+        when '2'
+            puts "opcao 2"
+        when '3'
+            puts "opcao 3"
+        when '4'
+            client.remove
+    else
+        "Opção inválida"
+    end
+end
+#ftp.list()
