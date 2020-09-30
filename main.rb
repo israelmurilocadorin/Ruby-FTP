@@ -5,7 +5,7 @@ require_relative 'client.rb'
 client = Client.new(Connection.new.connection)
 helper = Helper.new
 
-menu_options = ['Criar', 'Listar', 'Remover', 'Download', 'Sair']
+menu_options = ['Criar', 'Listar', 'Remover', 'Download', 'Criar pasta', 'Sair']
 
 puts "Bem vindo!"
 helper.space(2)
@@ -27,6 +27,9 @@ while true do
             client.download(helper.get_varible("Digite o nome do arquivo que deseja baixar: "))
             helper.space(2)
         when '5'
+            client.create_dir(helper.get_varible("Digite o nome da pasta: "))
+            helper.space(2)
+        when '6'
             client.close
             puts "Bye Bye..."
             return
